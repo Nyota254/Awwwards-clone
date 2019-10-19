@@ -14,14 +14,16 @@
     {% endblock %}
 
     {% if title %}
-    <title>Insta-clone - {{ title }}</title>
+    <title>Awwwards-clone - {{ title }}</title>
     {% else %}
-    <title>Insta-clone</title>
+    <title>Awwwards-clone</title>
     {% endif %}
 
 </head>
 <body>
     
+    {% include 'main/navbar.html' %}
+
     {% if messages %}
         {% for message in messages %}
             <div class="alert alert-{{ message.tags }}">
