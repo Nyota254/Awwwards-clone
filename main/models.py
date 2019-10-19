@@ -11,6 +11,9 @@ class Project(models.Model):
     image = models.ImageField(upload_to='site_photos/')
     user = models.ForeignKey(User,on_delete=models.CASCADE)
 
+    def __str__(self):
+        return f'{self.user.username} {self.title} Project'
+
 class Rating(models.Model):
     '''
     This model will contain the ratings for diffrent categories
@@ -21,3 +24,5 @@ class Rating(models.Model):
     project = models.ForeignKey(Project,on_delete=models.CASCADE)
     user = models.ForeignKey(User,on_delete=models.CASCADE) 
 
+    def __str__(self):
+        return f'{self.user.username} {self.project.title} Rating'
