@@ -1,0 +1,65 @@
+{% extends 'main/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<div class="rating-page" style="background-image: url({{project.image.url}});height: 100vh;">
+
+</div>
+
+<div class="container-fluid">
+    <h1 class="project-details-heading">Project Details</h1>
+    <hr>
+    <h2 class="project-details-heading">Project Title</h2>
+    <p>{{ project.title }}</p><br>
+
+    <h2 class="project-details-heading">Project Details</h2>
+    <p>{{ project.description }}</p><br>
+
+    <h2 class="project-details-heading">Visit The Site</h2>
+    <a href="{{project.link}}">Visit Site</a><br>
+
+    <h2 class="project-details-heading">Rate this site</h2>
+    <div class="row">
+        <!-- <div class="col-md-4"></div> -->
+        <div class="col-md-4">
+            <h2 class="project-details-heading">Rate</h2><hr>
+            <form action="" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form|crispy }}
+
+                <div class="form-group">
+                    <button class="btn btn-outline-info" type="submit">Submit Rating</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-8">
+            <h2 class="project-details-heading">Ratings</h2><hr>
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">User</th>
+                        <th scope="col">Design</th>
+                        <th scope="col">Usability</th>
+                        <th scope="col">Content</th>
+                    </tr>
+                </thead>
+                <tbody>
+                        {% if project_rating %}
+                        {% for rating in project_rating %}
+                    <tr>
+                        <th scope="row">{{ forloop.counter }}</th>
+                        <td><img src="{{ rating.user.profile.profile_pic.url }}" alt="profile picture" class="rounded-circle custom-display border border-danger">{{ rating.user.username }}</td>
+                        <td>{{ rating.design }}</td>
+                        <td>{{ rating.usability }}</td>
+                        <td>{{ rating.content }}</td>
+                    </tr>
+                    {% endfor %}
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

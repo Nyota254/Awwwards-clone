@@ -36,3 +36,33 @@ def Upload_Project(request):
     }
 
     return render(request,"main/upload_project.html",context)
+
+@login_required
+def RateProject(request,pk):
+    '''
+    Function to display single Project and rate it
+    '''
+    project = Project.objects.get(id=pk)
+    title = "Rating"
+    current_user = request.user
+    project_rating = Rating.objects.filter(project=project).order_by("-pk")
+    
+    if request.method == "POST":
+        form = RatingUploadForm(request.POST)
+        if form.is_valid():
+            rating = form.save(commit=False)
+            rating.user = current_user
+            rating.project = project
+            rating.save()
+            return redirect(RateProject)
+    else:
+        form = RatingUploadForm()
+
+    context = {
+        "project":project,
+        "form":form,
+        "project_rating":project_rating
+    }
+
+    return render(request,"main/rateproject.html",context)
+    
