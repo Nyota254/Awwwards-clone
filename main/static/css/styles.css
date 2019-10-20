@@ -1,3 +1,45 @@
-.upload-form-heading {
+.landing-page {
+    background-image: url(../assets/BeFunky-photo\ \(1\).png);
+    height: 100vh;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+.upload-form-heading,.landing-page-heading,.project-details-heading {
     font-family: 'Trochut', cursive;
+}
+
+body { 
+    padding-top: 60px; 
+}
+
+.landing-page-heading {
+    color: white;
+    padding-top: 300px;
+}
+
+.project-row {
+    padding-top: 30px;
+    /* background-color:grey; */
+}
+
+.custom-display {
+    height: 50px;
+    width: 50px;
+    padding: 3px;
+}
+
+.project-owner-display {
+    display:flex;
+    padding-bottom: 5px;
+}
+
+.card-body,.card-footer {
+    background-color: black;
+    color: white;
+}
+
+#button-rate {
+    border-radius: 20px;
+    background-color: grey;
 }
