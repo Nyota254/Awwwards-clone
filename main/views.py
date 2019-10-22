@@ -89,6 +89,14 @@ def User_Profile(request):
         "current_user":current_user
     }
     return render(request,"main/profile_details.html",context)
+
+@login_required
+def Dev_center(request):
+    title = "Devcenter"
+    context = {
+        "title":title
+    }
+    return render(request,"main/devcenter.html",context)
     
 class ProjectList(APIView):
     def get(self,request,format=None):
