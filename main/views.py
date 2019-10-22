@@ -52,16 +52,25 @@ def RateProject(request,pk):
     title = "Rating"
     current_user = request.user
     project_rating = Rating.objects.filter(project=project).order_by("pk")
+    current_user_id = request.user.id
+    project_rated = Rating.objects.filter(user=current_user_id)
     # design_mean_rating = project.aggregate(Avg('design'))
 
     if request.method == "POST":
         form = RatingUploadForm(request.POST)
-        if form.is_valid():
+        if form.is_valid() and project_rated is None:
             rating = form.save(commit=False)
             rating.user = current_user
             rating.project = project
             rating.save()
             return redirect(RateProject)
+        elif form.is_valid() and project_rated is not None:
+            project_rated.delete()
+            rating = form.save(commit=False)
+            rating.user = current_user
+            rating.project = project
+            rating.save()
+            return redirect(RateProject,pk)
     else:
         form = RatingUploadForm()
 
