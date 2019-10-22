@@ -1,0 +1,1 @@
+web: Awwwards_clone.wsgi --log-file -
