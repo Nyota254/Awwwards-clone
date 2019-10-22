@@ -19,6 +19,7 @@ from django.urls import path,re_path,include
 from users import views as user_views
 from django.conf import settings
 from django.conf.urls.static import static
+from main import views
 
 
 urlpatterns = [
@@ -27,7 +28,8 @@ urlpatterns = [
     re_path('^profile/',user_views.profile,name="profile"),
     re_path('',include('main.urls')),
     re_path('^login/',auth_views.LoginView.as_view(template_name='users/login.html'),name='login'),
-    re_path('^logout',auth_views.LogoutView.as_view(template_name='users/logout.html'),name='logout')
+    re_path('^logout',auth_views.LogoutView.as_view(template_name='users/logout.html'),name='logout'),
+    re_path('^api/projects/$', views.ProjectList.as_view())
 ]
 if settings.DEBUG:
     urlpatterns+= static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

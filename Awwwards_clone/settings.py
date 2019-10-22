@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'main.apps.MainConfig',
     'crispy_forms',
+    'rest_framework',
     'bootstrap4',
     'django.contrib.admin',
     'django.contrib.auth',
