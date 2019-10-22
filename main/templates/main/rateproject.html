@@ -3,7 +3,7 @@
 
 {% block content %}
 
-<div class="rating-page" style="background-image: url({{project.image.url}});height: 100vh;">
+<div class="rating-page" style="background-image: url({{project.image.url}});height: 100vh;background-attachment: fixed;">
 
 </div>
 
@@ -11,7 +11,7 @@
     <h1 class="project-details-heading">Project Details</h1>
     <hr>
     <h2 class="project-details-heading">Project Title</h2>
-    <p>{{ project.title }}</p><br>
+    <p>{{ project.title }} {{ design_mean }}</p><br>
 
     <h2 class="project-details-heading">Project Details</h2>
     <p>{{ project.description }}</p><br>
