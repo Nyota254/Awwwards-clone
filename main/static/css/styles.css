@@ -43,3 +43,35 @@ body {
     border-radius: 20px;
     background-color: grey;
 }
+
+/******************************************** 
+
+Start of top section for project rating view 
+
+**********************************************/
+.spinners{
+    width: 1000px;
+    padding-top:250px;
+    padding-left:250px;
+}
+
+.spinners .box {
+    width: 25%;
+    float: left;
+}
+
+.spinners .box .chart {
+    position:relative;
+    width: 110px;
+    height: 110px;
+    margin:0 auto;
+    text-align: center;
+    color: white;
+    font-size: 30px;
+}
+
+/* .spinners .box canvas {
+    position: absolute;
+    top: -3px;
+    left: 0;
+} */

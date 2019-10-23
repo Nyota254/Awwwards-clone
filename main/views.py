@@ -54,7 +54,37 @@ def RateProject(request,pk):
     project_rating = Rating.objects.filter(project=project).order_by("pk")
     current_user_id = request.user.id
     project_rated = Rating.objects.filter(user=current_user_id)
-    # design_mean_rating = project.aggregate(Avg('design'))
+
+
+    design_mean_rating = []
+    for d_rating in project_rating:
+        design_mean_rating.append(d_rating.design)
+    try:
+        design_average = sum(design_mean_rating)/len(design_mean_rating)
+        design_percent = design_average * 10
+    except ZeroDivisionError:
+        design_average = "no ratings yet"
+        design_percent = 0
+
+    usability_mean_rating = []
+    for u_rating in project_rating:
+        usability_mean_rating.append(u_rating.usability)
+    try:
+        usability_average = sum(usability_mean_rating)/len(usability_mean_rating)
+        usability_percent = usability_average *10
+    except ZeroDivisionError:
+        usability_average = "no ratings yet"
+        usability_percent = 0
+    
+    content_mean_rating = []
+    for c_rating in project_rating:
+        content_mean_rating.append(c_rating.content)
+    try:
+        content_average = sum(content_mean_rating)/len(content_mean_rating)
+        content_percent = content_average * 10
+    except ZeroDivisionError:
+        content_average = "no ratings yet"
+        content_percent = 0
 
     if request.method == "POST":
         form = RatingUploadForm(request.POST)
@@ -78,6 +108,12 @@ def RateProject(request,pk):
         "project":project,
         "form":form,
         "project_rating":project_rating,
+        "design_average":design_average,
+        "content_average":content_average,
+        "usability_average":usability_average,
+        "usability_percent":usability_percent,
+        "content_percent":content_percent,
+        "design_percent":design_percent
     }
 
     return render(request,"main/rateproject.html",context)

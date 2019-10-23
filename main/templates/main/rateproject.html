@@ -3,10 +3,19 @@
 
 {% block content %}
 
-<div class="rating-page" style="background-image: url({{project.image.url}});height: 100vh;background-attachment: fixed;">
-
+<div class="rating-page above" style="background-image: url({{project.image.url}});height: 100vh;background-attachment: fixed;">
+    <div class="container spinners">
+        <div class="box">
+            <div class="chart" data-percent="{{content_percent}}">Content {{ content_average }}</div>
+        </div>
+        <div class="box">
+            <div class="chart" data-percent="{{ usability_percent }}">Usability {{ usability_average }}</div>
+        </div>
+        <div class="box">
+            <div class="chart" data-percent="{{ design_percent }}">Design {{ design_average }}</div>
+        </div>
+    </div>    
 </div>
-
 <div class="container-fluid">
     <h1 class="project-details-heading">Project Details</h1>
     <hr>
@@ -46,6 +55,13 @@
                     </tr>
                 </thead>
                 <tbody>
+                        <tr>
+                                <th scope="row">Average</th>
+                                <td>All</td>
+                                <td>{{ design_average }}</td>
+                                <td>{{ usability_average }}</td>
+                                <td>{{ content_average }}</td>
+                            </tr>
                         {% if project_rating %}
                         {% for rating in project_rating %}
                     <tr>
