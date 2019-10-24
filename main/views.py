@@ -63,7 +63,7 @@ def RateProject(request,pk):
         design_average = sum(design_mean_rating)/len(design_mean_rating)
         design_percent = design_average * 10
     except ZeroDivisionError:
-        design_average = "no ratings yet"
+        design_average = "0"
         design_percent = 0
 
     usability_mean_rating = []
@@ -73,7 +73,7 @@ def RateProject(request,pk):
         usability_average = sum(usability_mean_rating)/len(usability_mean_rating)
         usability_percent = usability_average *10
     except ZeroDivisionError:
-        usability_average = "no ratings yet"
+        usability_average = "0"
         usability_percent = 0
     
     content_mean_rating = []
@@ -83,7 +83,7 @@ def RateProject(request,pk):
         content_average = sum(content_mean_rating)/len(content_mean_rating)
         content_percent = content_average * 10
     except ZeroDivisionError:
-        content_average = "no ratings yet"
+        content_average = "0"
         content_percent = 0
 
     if request.method == "POST":

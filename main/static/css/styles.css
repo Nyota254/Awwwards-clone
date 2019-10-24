@@ -72,7 +72,8 @@ Start of top section for project rating view
     height: 110px;
     margin:0 auto;
     text-align: center;
-    color: red;
+    color: white;
+    text-shadow: 1px 1px 12px gold;
     font-size: 30px;
 }
 
@@ -81,3 +82,9 @@ Start of top section for project rating view
     top: -3px;
     left: 0;
 } */
+
+/******** overlay for rating section *********/
+#overlay {
+    background-color: rgba(0, 0, 0, 0.6);
+    height: 100vh;
+}
