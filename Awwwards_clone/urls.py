@@ -31,6 +31,7 @@ urlpatterns = [
     re_path('^logout',auth_views.LogoutView.as_view(template_name='users/logout.html'),name='logout'),
     re_path('^api/projects/$', views.ProjectList.as_view(),name="all_projects_api"),
     re_path('^api/profiles/$',views.ProfileList.as_view(),name="all_profiles_api"),
+    re_path('^ajax/rate/(?P<pk>\d+)',views.AjaxRating,name="ajaxrating")
 ]
 if settings.DEBUG:
     urlpatterns+= static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

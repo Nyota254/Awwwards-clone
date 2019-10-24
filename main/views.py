@@ -8,6 +8,7 @@ from rest_framework.views import APIView
 from .serializer import ProfileSerializer,ProjectSerializer
 from users.models import Profile
 from django.contrib.auth.models import User
+from django.http import JsonResponse
 
 def Index_view(request):
     '''
@@ -86,23 +87,25 @@ def RateProject(request,pk):
         content_average = "0"
         content_percent = 0
 
-    if request.method == "POST":
-        form = RatingUploadForm(request.POST)
-        if form.is_valid() and project_rated is None:
-            rating = form.save(commit=False)
-            rating.user = current_user
-            rating.project = project
-            rating.save()
-            return redirect(RateProject)
-        elif form.is_valid() and project_rated is not None:
-            project_rated.delete()
-            rating = form.save(commit=False)
-            rating.user = current_user
-            rating.project = project
-            rating.save()
-            return redirect(RateProject,pk)
-    else:
-        form = RatingUploadForm()
+    # if request.method == "POST":
+    #     form = RatingUploadForm(request.POST)
+    #     if form.is_valid() and project_rated is None:
+    #         rating = form.save(commit=False)
+    #         rating.user = current_user
+    #         rating.project = project
+    #         rating.save()
+    #         return redirect(RateProject)
+    #     elif form.is_valid() and project_rated is not None:
+    #         project_rated.delete()
+    #         rating = form.save(commit=False)
+    #         rating.user = current_user
+    #         rating.project = project
+    #         rating.save()
+    #         return redirect(RateProject,pk)
+    # else:
+    #     form = RatingUploadForm()
+
+    form = RatingUploadForm()
 
     context = {
         "project":project,
@@ -117,6 +120,37 @@ def RateProject(request,pk):
     }
 
     return render(request,"main/rateproject.html",context)
+
+@login_required
+def AjaxRating(request,pk):
+    '''
+    Ajax function for uploading user rating
+    '''
+
+    project = Project.objects.get(id=pk)
+    current_user_id = request.user.id
+    project_rated = Rating.objects.filter(user=current_user_id)
+
+    if request.method == "POST":
+        if project_rated == None:
+            design = request.POST.get("design")
+            usability = request.POST.get("usability")
+            content = request.POST.get("content")
+            rating = Rating(design=design,usability=usability,content=content,project=project,user=request.user)
+            rating.save()
+            data2={"design":design,"usability":usability,"content":content,"uid":current_user_id}
+            data = {'success': 'You have successfuly rated this project'}
+            return JsonResponse(data2)
+        else:
+            project_rated.delete()
+            design = request.POST.get("design")
+            usability = request.POST.get("usability")
+            content = request.POST.get("content")
+            rating = Rating(design=design,usability=usability,content=content,project=project,user=request.user)
+            rating.save()
+            data2={"design":design,"usability":usability,"content":content,"uid":current_user_id}
+            data = {'success': 'You have successfuly rated this project'}
+            return JsonResponse(data2)
 
 @login_required
 def User_Profile(request):

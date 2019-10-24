@@ -50,10 +50,10 @@
         <div class="col-md-4">
             <h2 class="project-details-heading">Rate</h2>
             <hr>
-            <form action="" method="POST" enctype="multipart/form-data">
+            <form action="" method="POST" enctype="multipart/form-data" id="ratingform">
                 {% csrf_token %}
                 {{ form|crispy }}
-
+                <input type="hidden" value="{{ project.id }}" id="project_id">
                 <div class="form-group">
                     <button class="btn btn-outline-info" type="submit">Submit Rating</button>
                 </div>
@@ -82,14 +82,14 @@
                     </tr>
                     {% if project_rating %}
                     {% for rating in project_rating %}
-                    <tr>
+                    <tr class="rate{{rating.user.id}}">
                         <th scope="row">{{ forloop.counter }}</th>
                         <td><img src="{{ rating.user.profile.profile_pic.url }}" alt="profile picture"
                                 class="rounded-circle custom-display border border-danger">{{ rating.user.username }}
                         </td>
-                        <td>{{ rating.design }}</td>
-                        <td>{{ rating.usability }}</td>
-                        <td>{{ rating.content }}</td>
+                        <td class="t-design">{{ rating.design }}</td>
+                        <td class="t-usability">{{ rating.usability }}</td>
+                        <td class="t-content">{{ rating.content }}</td>
                     </tr>
                     {% endfor %}
                     {% endif %}
