@@ -16,11 +16,17 @@ body {
 .landing-page-heading {
     color: white;
     padding-top: 300px;
+    text-shadow: 1px 1px 12px gold;
 }
 
 .project-row {
     padding-top: 30px;
-    /* background-color:grey; */
+    background:white;
+}
+.bg-projects {
+    background-attachment: fixed;
+    background-size: cover;
+    background-image: url(../assets/awwardsbg.jpeg);
 }
 
 .custom-display {
