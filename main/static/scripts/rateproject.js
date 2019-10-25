@@ -20,10 +20,21 @@ $(document).ready(function(){
             'dataType': 'json',
         })
         .done(function(data){
-            console.table(data);
-            $(".rate"+data.uid+" .t-design").text(data.design)
-            $(".rate"+data.uid+" .t-usability").text(data.usability)
-            $(".rate"+data.uid+" .t-content").text(data.content)
+            // $(".user"+data.uid+".t-user").text()
+            if (data.user == null){
+                console.table(data);
+                alert(data.success)
+                $(".rate"+data.uid+" .t-design").text(data.design)
+                $(".rate"+data.uid+" .t-usability").text(data.usability)
+                $(".rate"+data.uid+" .t-content").text(data.content)
+            } else if(data.user) {
+                // console.table(data);
+                alert(data.success)
+                $(".rate"+data.uid+".t-user").append(data.user.username)
+                $(".rate"+data.uid+" .t-design").append(data.design)
+                $(".rate"+data.uid+" .t-usability").append(data.usability)
+                $(".rate"+data.uid+" .t-content").append(data.content)
+            }
             
         }) 
         //Ajax end function

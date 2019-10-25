@@ -84,7 +84,7 @@
                     {% for rating in project_rating %}
                     <tr class="rate{{rating.user.id}}">
                         <th scope="row">{{ forloop.counter }}</th>
-                        <td><img src="{{ rating.user.profile.profile_pic.url }}" alt="profile picture"
+                        <td class="t-user"><img src="{{ rating.user.profile.profile_pic.url }}" alt="profile picture"
                                 class="rounded-circle custom-display border border-danger">{{ rating.user.username }}
                         </td>
                         <td class="t-design">{{ rating.design }}</td>

@@ -129,6 +129,7 @@ def AjaxRating(request,pk):
 
     project = Project.objects.get(id=pk)
     current_user_id = request.user.id
+    current_user = request.user
     project_rated = Rating.objects.filter(user=current_user_id)
 
     if request.method == "POST":
@@ -138,7 +139,7 @@ def AjaxRating(request,pk):
             content = request.POST.get("content")
             rating = Rating(design=design,usability=usability,content=content,project=project,user=request.user)
             rating.save()
-            data2={"design":design,"usability":usability,"content":content,"uid":current_user_id}
+            data2={"design":design,"usability":usability,"content":content,"uid":current_user_id,"user":current_user,"success":"Successfuly rated"}
             data = {'success': 'You have successfuly rated this project'}
             return JsonResponse(data2)
         else:
@@ -148,7 +149,7 @@ def AjaxRating(request,pk):
             content = request.POST.get("content")
             rating = Rating(design=design,usability=usability,content=content,project=project,user=request.user)
             rating.save()
-            data2={"design":design,"usability":usability,"content":content,"uid":current_user_id}
+            data2={"design":design,"usability":usability,"content":content,"uid":current_user_id,"success":"Successfuly rated refresh to view new data"}
             data = {'success': 'You have successfuly rated this project'}
             return JsonResponse(data2)
 
