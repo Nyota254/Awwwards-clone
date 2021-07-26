@@ -105,7 +105,3 @@ View the following [document](https://github.com/jakhax/deploying-django-to-hero
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
-
-## Acknowledgments
-
-Moringa School for guidance throughout the entire project
